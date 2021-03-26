@@ -9,7 +9,7 @@
 
 ```bash
 # 直接从github克隆代码
-git clone https://github.com/cyjseagull/spring-boot-crud
+git clone https://github.com/FISCO-BCOS/spring-boot-crud
 
 # 若网络很慢，可从gittee克隆代码
 git clone https://gitee.com/FISCO-BCOS/spring-boot-crud
