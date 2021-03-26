@@ -22,7 +22,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fisco</groupId>
-    <artifactId>app</artifactId>
+    <artifactId>fisco-bcos-spring-boot-crud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>app</name>
     <description>springboot应用调用区块链sdk</description>

@@ -61,11 +61,31 @@ server:
   port: 45000
 ```
 
+### 编译和安装项目
 
-### 运行spring boot web服务
+可以使用IDEA导入并编译并安装该项目，也可使用提供的`mvnw`脚本在命令行编译项目如下：
+
+```bash
+# 编译项目
+$ bash mvnw compile
+
+# 安装项目，安装完毕后，在target/目录下生成fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar的jar包
+$ bash mvnw install
+```
+### 启动spring-boot-crud服务
+
+**方法一：** 
 
 打开IDEA导入并编译该项目，编译成功后，运行`AppApplication.java`即可启动spring boot服务。
 
+**方法二**
+
+使用`bash mvnw install`生成的jar包`target/fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar`启动spring-boot-crud服务：
+
+```bash
+# 启动spring-boot-crud(启动成功后会输出create client for group 1 success的日志)
+$ java -jar ./target/fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar
+```
 
 ## 访问spring boot web服务
 ### 访问用户信息上链API(CRUD insert)
@@ -73,17 +93,17 @@ server:
 `spring-boot-crud`基于CRUD insert接口实现了用户信息上链的API，将`Person`类型的用户信息上链，API声明如下：
 
 ```java
-    @Data
-    public class Person {
-        private String name;
-        private String age;
-        private String tel;
-    }
-    @PostMapping("/insert")
-    public ResponseData insert(@RequestBody Person person)  {
-        crudClient.insert(person.getName(),person.getAge(), person.getTel());
-        return ResponseData.success("新增成功");
-    }
+@Data
+public class Person {
+    private String name;
+    private String age;
+    private String tel;
+}
+@PostMapping("/insert")
+public ResponseData insert(@RequestBody Person person)  {
+    crudClient.insert(person.getName(),person.getAge(), person.getTel());
+    return ResponseData.success("新增成功");
+}
 ```
 
 **使用curl工具访问接口如下**：
