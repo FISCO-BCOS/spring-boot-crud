@@ -42,7 +42,8 @@ $ cp ~/fisco/nodes/127.0.0.1/sdk/* src/main/resources/conf/
     <map>
         <entry key="peers">
             <list>
-                <value>127.0.0.1:20200</value> # 节点，channel_listen_ip:channel_listen_port
+                <!--节点，channel_listen_ip:channel_listen_port-->
+                <value>127.0.0.1:20200</value>  
                 <value>127.0.0.1:20201</value>
             </list>
         </entry>
