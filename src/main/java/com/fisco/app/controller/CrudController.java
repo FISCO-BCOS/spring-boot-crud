@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2021/3/25 22:25
  * @Created by zyt
  */
-@RequestMapping("/test")
 @RestController
 public class CrudController {
 
