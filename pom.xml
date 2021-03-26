@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <repositories>
+        <repository>
+            <id>oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -46,8 +59,8 @@
         <!-- https://mvnrepository.com/artifact/org.fisco-bcos.java-sdk/java-sdk -->
         <dependency>
             <groupId>org.fisco-bcos.java-sdk</groupId>
-            <artifactId>java-sdk</artifactId>
-            <version>2.7.0</version>
+            <artifactId>fisco-bcos-java-sdk</artifactId>
+            <version>2.8.0-SNAPSHOT</version>
             <!--排除这个slf4j-log4j12-->
             <exclusions>
                 <exclusion>
