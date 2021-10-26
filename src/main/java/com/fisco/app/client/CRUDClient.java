@@ -4,7 +4,7 @@ import com.fisco.app.common.CommonClient;
 import com.fisco.app.contract.TestCRUD;
 import com.fisco.app.utils.SpringUtils;
 import org.fisco.bcos.sdk.BcosSDK;
-import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple3;
+import org.fisco.bcos.sdk.codec.datatypes.generated.tuples.generated.Tuple3;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import org.slf4j.Logger;
@@ -68,6 +68,6 @@ public class CRUDClient extends CommonClient implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         BcosSDK sdk = SpringUtils.getBean("bcosSDK");
-        deploy("TestCRUD", TestCRUD.class, sdk, 1);
+        deploy("TestCRUD", TestCRUD.class, sdk, "group");
     }
 }

@@ -28,8 +28,8 @@ contract TestCRUD {
         Table table = tableFactory.openTable(TABLE_NAME);
 
         Condition condition = table.newCondition();
-
-        Entries entries = table.select(name, condition);
+        condition.EQ("name",name);
+        Entries entries = table.select(condition);
         string[] memory user_name_bytes_list = new string[](uint256(entries.size()));
         string[] memory age_list = new string[](uint256(entries.size()));
         string[] memory tel_list = new string[](uint256(entries.size()));
@@ -58,7 +58,7 @@ contract TestCRUD {
         entry.set("age", age);
         entry.set("tel", tel);
 
-        int256 count = table.insert(name, entry);
+        int256 count = table.insert(entry);
         emit InsertResult(count);
 
         return count;
@@ -77,7 +77,7 @@ contract TestCRUD {
         Condition condition = table.newCondition();
         condition.EQ("name", name);
 
-        int256 count = table.update(name, entry, condition);
+        int256 count = table.update(entry, condition);
         emit UpdateResult(count);
 
         return count;
@@ -89,7 +89,7 @@ contract TestCRUD {
         Condition condition = table.newCondition();
         condition.EQ("name", name);
 
-        int256 count = table.remove(name, condition);
+        int256 count = table.remove(condition);
         emit RemoveResult(count);
 
         return count;
