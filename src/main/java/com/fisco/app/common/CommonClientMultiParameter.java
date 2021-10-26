@@ -3,6 +3,7 @@ package com.fisco.app.common;
 import org.fisco.bcos.sdk.BcosSDK;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
+import org.fisco.bcos.sdk.network.NetworkException;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,19 +26,19 @@ public abstract class CommonClientMultiParameter {
     public CommonClientMultiParameter() {
     }
 
-    private Map<String,Object> contractMap = new ConcurrentHashMap<>();
+    private Map<String, Object> contractMap = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
-    public <T> void deploy(String contractName, Class<T> clazz, BcosSDK sdk, Integer groupId) throws ContractException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public <T> void deploy(String contractName, Class<T> clazz, BcosSDK sdk, String groupId) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NetworkException {
         // 为群组1初始化client
         Client client = sdk.getClient(groupId);
         // 向群组1部署合约
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().getCryptoKeyPair();
-        Method method = clazz.getMethod("deploy", Client.class,CryptoKeyPair.class);
-        T result = (T) method.invoke(null,new Object[]{client,cryptoKeyPair});
-        logger.info("执行CommonClient的deploy方法");
-        logger.info("部署合约成功:{}"+contractName,result);
-        contractMap.put(contractName,result);
+        Method method = clazz.getMethod("deploy", Client.class, CryptoKeyPair.class);
+        T result = (T) method.invoke(null, new Object[]{client, cryptoKeyPair});
+        logger.info("CommonClientMultiParameter");
+        logger.info("部署合约成功:{}" + contractName, result);
+        contractMap.put(contractName, result);
     }
 
     public Object getContractMap(String contractName) {

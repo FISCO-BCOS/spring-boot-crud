@@ -29,20 +29,20 @@ public class CrudMultiParameterController {
 
 
     @PostMapping("/insert")
-    public ResponseData insert(@RequestBody  String[] params)  {
+    public ResponseData insert(@RequestBody String[] params) {
         crudClient.insert(Arrays.asList(params));
         return ResponseData.success("新增成功");
     }
 
 
     @PutMapping("/update")
-    public ResponseData update(@RequestBody  String[] params){
+    public ResponseData update(@RequestBody String[] params) {
         crudClient.edit(Arrays.asList(params));
         return ResponseData.success("修改成功");
     }
 
     @DeleteMapping("/remove/{name}")
-    public ResponseData remove(@PathVariable("name") String name){
+    public ResponseData remove(@PathVariable("name") String name) {
         crudClient.remove(name);
         return ResponseData.success("删除成功");
     }

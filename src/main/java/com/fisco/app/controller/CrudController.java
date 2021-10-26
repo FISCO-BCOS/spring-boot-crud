@@ -27,20 +27,20 @@ public class CrudController {
 
 
     @PostMapping("/insert")
-    public ResponseData insert(@RequestBody Person person)  {
-        crudClient.insert(person.getName(),person.getAge(), person.getTel());
+    public ResponseData insert(@RequestBody Person person) {
+        crudClient.insert(person.getName(), person.getAge(), person.getTel());
         return ResponseData.success("新增成功");
     }
 
 
     @PutMapping("/update")
-    public ResponseData update(@RequestBody Person person){
-        crudClient.edit(person.getName(),person.getAge(), person.getTel());
+    public ResponseData update(@RequestBody Person person) {
+        crudClient.edit(person.getName(), person.getAge(), person.getTel());
         return ResponseData.success("修改成功");
     }
 
     @DeleteMapping("/remove/{name}")
-    public ResponseData remove(@PathVariable("name") String name){
+    public ResponseData remove(@PathVariable("name") String name) {
         crudClient.remove(name);
         return ResponseData.success("删除成功");
     }

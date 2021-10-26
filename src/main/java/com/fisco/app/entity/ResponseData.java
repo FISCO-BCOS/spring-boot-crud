@@ -11,14 +11,14 @@ public class ResponseData<T> {
     private String msg;
     private T data;
 
-    public static ResponseData success( String msg) {
+    public static ResponseData success(String msg) {
         ResponseData responseData = new ResponseData();
         responseData.setCode(200);
         responseData.setMsg(msg);
         return responseData;
     }
 
-    public static <T> ResponseData<T> success( T t) {
+    public static <T> ResponseData<T> success(T t) {
         ResponseData responseData = new ResponseData();
         responseData.setCode(200);
         responseData.setData(t);
@@ -32,7 +32,7 @@ public class ResponseData<T> {
         return responseData;
     }
 
-    public static <T> ResponseData<T> error( T t) {
+    public static <T> ResponseData<T> error(T t) {
         ResponseData responseData = new ResponseData();
         responseData.setCode(500);
         responseData.setData(t);

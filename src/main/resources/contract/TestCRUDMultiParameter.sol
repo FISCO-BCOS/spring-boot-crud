@@ -16,10 +16,8 @@ contract TestCRUDMultiParameter {
     //定义属性，多参数通过数组解决,数组第一个值为主键
     string []  properties = ["name","age","tel"];
     constructor() public {
-        
         tableFactory = TableFactory(0x1001); 
         tableFactory.createTable(TABLE_NAME, "name", "age,tel");
-       
     }
 
      //插入数据
@@ -34,7 +32,7 @@ contract TestCRUDMultiParameter {
             entry.set(properties[i], entity[i]);
         }
 
-        int256 count = table.insert(entity[0], entry);
+        int256 count = table.insert(entry);
         emit InsertResult(count);
 
         return count;
@@ -49,8 +47,8 @@ contract TestCRUDMultiParameter {
         Table table = tableFactory.openTable(TABLE_NAME);
 
         Condition condition = table.newCondition();
-
-        Entries entries = table.select(name, condition);
+        condition.EQ("name", name);
+        Entries entries = table.select(condition);
         string[] memory user_name_bytes_list = new string[](uint256(entries.size()));
         string[] memory age_list = new string[](uint256(entries.size()));
         string[] memory tel_list = new string[](uint256(entries.size()));
@@ -80,7 +78,7 @@ contract TestCRUDMultiParameter {
         Condition condition = table.newCondition();
         condition.EQ(properties[0], entity[0]);
 
-        int256 count = table.update(entity[0], entry, condition);
+        int256 count = table.update(entry, condition);
         emit UpdateResult(count);
 
         return count;
@@ -93,7 +91,7 @@ contract TestCRUDMultiParameter {
         Condition condition = table.newCondition();
         condition.EQ(properties[0], name);
 
-        int256 count = table.remove(name, condition);
+        int256 count = table.remove(condition);
         emit RemoveResult(count);
 
         return count;
