@@ -25,3 +25,4 @@ target
 
 .DS_Store
 /src/main/resources/conf**
+clog.ini
