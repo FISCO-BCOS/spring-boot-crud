@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.fisco-bcos.java-sdk</groupId>
             <artifactId>fisco-bcos-java-sdk</artifactId>
-            <version>3.1.0-111901-SNAPSHOT</version>
+            <version>3.1.0-SNAPSHOT</version>
             <!--排除这个slf4j-log4j12-->
             <exclusions>
                 <exclusion>
@@ -69,8 +69,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -84,6 +84,14 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                    <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    </configuration>
             </plugin>
         </plugins>
     </build>
