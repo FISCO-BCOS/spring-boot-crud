@@ -68,6 +68,6 @@ public class CRUDClient extends CommonClient implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         BcosSDK sdk = SpringUtils.getBean("bcosSDK");
-        deploy("TestCRUD", TestCRUD.class, sdk, "group");
+        deploy("TestCRUD", TestCRUD.class, sdk);
     }
 }
