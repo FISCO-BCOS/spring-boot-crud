@@ -29,9 +29,9 @@ public abstract class CommonClientMultiParameter {
     private Map<String, Object> contractMap = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
-    public <T> void deploy(String contractName, Class<T> clazz, BcosSDK sdk, String groupId) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NetworkException {
+    public <T> void deploy(String contractName, Class<T> clazz, BcosSDK sdk) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NetworkException {
         // 为群组1初始化client
-        Client client = sdk.getClient(groupId);
+        Client client = sdk.getClient();
         // 向群组1部署合约
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().getCryptoKeyPair();
         Method method = clazz.getMethod("deploy", Client.class, CryptoKeyPair.class);

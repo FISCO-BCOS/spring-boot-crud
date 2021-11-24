@@ -60,6 +60,6 @@ public class CRUDMultiParameterClient extends CommonClientMultiParameter impleme
     @Override
     public void run(ApplicationArguments args) throws Exception {
         BcosSDK sdk = SpringUtils.getBean("bcosSDK");
-        deploy("TestCRUDMultiParameter", TestCRUDMultiParameter.class, sdk, "group");
+        deploy("TestCRUDMultiParameter", TestCRUDMultiParameter.class, sdk);
     }
 }
