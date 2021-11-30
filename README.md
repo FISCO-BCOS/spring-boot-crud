@@ -121,7 +121,7 @@ $ curl -H "Content-Type: application/json" -X POST --data '{"name":"fisco", "age
 
 ### 访问链上查询用户信息API(KV get)
 
-`spring-boot-crud`基于CRUD select接口实现了链上查询用户信息的API，基于用户名查询用户信息，API声明如下：
+`spring-boot-crud`基于KV get接口实现了链上查询用户信息的API，基于用户名查询用户信息，API声明如下：
 
 ```java
 @GetMapping("/get/{name}")
@@ -137,7 +137,7 @@ public ResponseData get(@PathVariable("name") String name) throws Exception {
 # 查询用户名为fisco的用户信息
 $ curl http://localhost:45000/get/fisco
 # 返回用户fisco的具体信息
-{"code":200,"msg":null,"data":{"value1":["fisco"],"value2":["6"],"value3":["123456789"],"size":3}}
+{"code":200,"msg":null,"data":{"value1":"fisco","value2":"6","value3":"123456789","size":3}}
 ```
 
 **注意：** 当前版本还不支持Table的CRUD接口，只提供KV接口的功能。CRUD的功能将在下个版本支持。
