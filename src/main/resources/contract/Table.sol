@@ -28,8 +28,3 @@ contract Table {
     function remove(string memory tableName, Condition memory condition) public returns (int256){}
     function desc(string memory tableName) public returns(string memory,string memory){}
 }
-contract KVTable {
-    function createTable(string memory tableName, string memory key, string memory valueFields) public returns (int256){}
-    function get(string memory tableName, string memory key) public view returns (bool, Entry memory entry){}
-    function set(string memory tableName,string memory key, Entry memory entry) public returns (int256){}
-}

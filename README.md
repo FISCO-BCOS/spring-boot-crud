@@ -5,6 +5,8 @@
 
 搭建FISCO BCOS区块链，具体步骤[参考这里](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
 
+**注意：** 当前版本还不支持Table的CRUD接口，只提供KV接口的功能。CRUD的功能将在下个版本支持。
+
 ### 获取源码
 
 ```bash
@@ -42,11 +44,11 @@ $ cp ~/fisco/nodes/127.0.0.1/sdk/* src/main/resources/conf/
     <map>
         <entry key="peers">
             <list>
-                <!--节点，channel_listen_ip:channel_listen_port-->
-                <value>127.0.0.1:20200</value>  
+                <value>127.0.0.1:20200</value>
                 <value>127.0.0.1:20201</value>
             </list>
         </entry>
+        <entry key="defaultGroup" value="group" />
     </map>
 </property>
 ...
@@ -88,7 +90,59 @@ $ java -jar ./target/fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar
 ```
 
 ## 访问spring boot web服务
-### 访问用户信息上链API(CRUD insert)
+
+### 访问用户信息上链API(KV set)
+
+`spring-boot-crud`基于KV set接口实现了用户信息上链的API，将`Person`类型的用户信息上链，API声明如下：
+
+```java
+@Data
+public class Person {
+    private String name;
+    private String age;
+    private String tel;
+}
+@PostMapping("/set")
+public ResponseData set(@RequestBody Person person) {
+    kvClient.set(person.getName(), person.getAge(), person.getTel());
+    return ResponseData.success("新增成功");
+}
+```
+
+**使用curl工具访问接口如下**：
+
+```bash
+# 这里假设WebServer监听端口为45000
+# 将用户fisco的信息上链，其中name为fisco, age为6，tel为123456789
+$ curl -H "Content-Type: application/json" -X POST --data '{"name":"fisco", "age":"6", "tel":"123456789"}' http://localhost:45000/set
+# 返回新增成功的信息
+{"code":200,"msg":"新增成功","data":null}
+```
+
+### 访问链上查询用户信息API(KV get)
+
+`spring-boot-crud`基于KV get接口实现了链上查询用户信息的API，基于用户名查询用户信息，API声明如下：
+
+```java
+@GetMapping("/get/{name}")
+public ResponseData get(@PathVariable("name") String name) throws Exception {
+    return ResponseData.success(kvClient.get(name));
+}
+```
+
+**使用curl工具访问接口如下**：
+
+```bash
+# 这里假设WebServer监听端口为45000
+# 查询用户名为fisco的用户信息
+$ curl http://localhost:45000/get/fisco
+# 返回用户fisco的具体信息
+{"code":200,"msg":null,"data":{"value1":"fisco","value2":"6","value3":"123456789","size":3}}
+```
+
+**注意：** 当前版本还不支持Table的CRUD接口，只提供KV接口的功能。CRUD的功能将在下个版本支持。
+
+### ~~访问用户信息上链API(CRUD insert)~~（暂不支持）
 
 `spring-boot-crud`基于CRUD insert接口实现了用户信息上链的API，将`Person`类型的用户信息上链，API声明如下：
 
@@ -116,7 +170,7 @@ $ curl -H "Content-Type: application/json" -X POST --data '{"name":"fisco", "age
 {"code":200,"msg":"新增成功","data":null}
 ```
 
-### 访问链上查询用户信息API(CRUD select)
+### ~~访问链上查询用户信息API(CRUD select)~~（暂不支持）
 
 `spring-boot-crud`基于CRUD select接口实现了链上查询用户信息的API，基于用户名查询用户信息，API声明如下：
 
@@ -137,7 +191,7 @@ $ curl http://localhost:45000/query/fisco
 {"code":200,"msg":null,"data":{"value1":["fisco"],"value2":["6"],"value3":["123456789"],"size":3}}
 ```
 
-### 访问用户信息链上更新API(CRUD update)
+### ~~访问用户信息链上更新API(CRUD update)~~（暂不支持）
 
 `spring-boot-crud`基于CRUD update接口实现了用户信息链上更新的API，API声明如下：
 
@@ -164,7 +218,7 @@ $ curl http://localhost:45000/query/fisco
 {"code":200,"msg":null,"data":{"value1":["fisco"],"value2":["10"],"value3":["123"],"size":3}}
 ```
 
-### 访问用户信息删除API(CRUD delete)
+### ~~访问用户信息删除API(CRUD delete)~~（暂不支持）
 
 `spring-boot-crud`基于CRUD delete接口实现了用户信息链上删除的API，该API根据用户名删除用户信息，API声明如下：
 

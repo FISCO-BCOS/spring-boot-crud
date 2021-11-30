@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import "./KVTable.sol";
 
-contract KVTableTest {
+contract TestKV {
     KVTable kv_table;
 
     event SetEvent(int256 count);

@@ -46,8 +46,6 @@ public abstract class CommonClient {
         return null;
     }
 
-    public abstract void remove(String name);
-
     public Map<String, Object> getContractMap() {
         return contractMap;
     }
@@ -55,8 +53,6 @@ public abstract class CommonClient {
     public void setContractMap(Map<String, Object> contractMap) {
         this.contractMap = contractMap;
     }
-
-
 }
 
 
