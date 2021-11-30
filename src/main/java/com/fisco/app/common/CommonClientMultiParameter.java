@@ -48,14 +48,6 @@ public abstract class CommonClientMultiParameter {
         return null;
     }
 
-    public abstract boolean insert(List<String> params);
-
-    public abstract List query(String name) throws ContractException;
-
-    public abstract boolean edit(List<String> params);
-
-    public abstract boolean remove(String name);
-
     public Map<String, Object> getContractMap() {
         return contractMap;
     }

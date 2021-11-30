@@ -21,7 +21,7 @@ import java.util.List;
  * @Date 2021/3/25 21:45
  * @Created by zyt
  */
-@Service
+//@Service
 public class CRUDClient extends CommonClient implements ApplicationRunner {
 
     public static final Logger logger = LoggerFactory.getLogger(CRUDClient.class.getName());
@@ -55,7 +55,6 @@ public class CRUDClient extends CommonClient implements ApplicationRunner {
 
     }
 
-    @Override
     public void remove(String name) {
 
         TestCRUD testCRUD = (TestCRUD) getContractMap().get("TestCRUD");

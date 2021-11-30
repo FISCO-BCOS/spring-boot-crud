@@ -19,9 +19,8 @@ import java.util.List;
  * @Date 2021/4/24 21:42
  * @Created by zyt
  */
-@Service
+//@Service
 public class CRUDMultiParameterClient extends CommonClientMultiParameter implements ApplicationRunner {
-    @Override
     public boolean insert(List<String> params) {
         TestCRUDMultiParameter testCRUDMultiParameter = (TestCRUDMultiParameter) getContractMap().get("TestCRUDMultiParameter");
         TransactionReceipt receipt = testCRUDMultiParameter.insert(params);
@@ -30,7 +29,6 @@ public class CRUDMultiParameterClient extends CommonClientMultiParameter impleme
         return true;
     }
 
-    @Override
     public List query(String name) throws ContractException {
         TestCRUDMultiParameter testCRUDMultiParameter = (TestCRUDMultiParameter) getContractMap().get("TestCRUDMultiParameter");
         List result = Collections.singletonList(testCRUDMultiParameter.select(name));
@@ -39,7 +37,6 @@ public class CRUDMultiParameterClient extends CommonClientMultiParameter impleme
         return result;
     }
 
-    @Override
     public boolean edit(List<String> params) {
         TestCRUDMultiParameter testCRUDMultiParameter = (TestCRUDMultiParameter) getContractMap().get("TestCRUDMultiParameter");
         TransactionReceipt receipt = testCRUDMultiParameter.update(params);
@@ -48,7 +45,6 @@ public class CRUDMultiParameterClient extends CommonClientMultiParameter impleme
         return true;
     }
 
-    @Override
     public boolean remove(String name) {
         TestCRUDMultiParameter testCRUDMultiParameter = (TestCRUDMultiParameter) getContractMap().get("TestCRUDMultiParameter");
         TransactionReceipt receipt = testCRUDMultiParameter.remove(name);

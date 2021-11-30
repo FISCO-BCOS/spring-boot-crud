@@ -5,7 +5,7 @@ pragma experimental ABIEncoderV2;
 import "./KVTable.sol";
 
 
-contract TestCRUDMultiParameter {
+contract TestKVMultiParameter {
 
     event SetEvent(int256 count);
 

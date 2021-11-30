@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2021/3/25 22:25
  * @Created by zyt
  */
-@RestController
+// TODO: Table crud is not support now
+//@RestController
 public class CrudController {
 
     @Autowired
