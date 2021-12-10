@@ -1,19 +1,19 @@
 # spring-boot-crud
-## 快速启动
 
-### 前置条件
+本示例项目基于Java SDK + Maven + SpringBoot方式来调用智能合约。
 
-搭建FISCO BCOS区块链，具体步骤[参考这里](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
+## 前置条件
 
+搭建FISCO BCOS 单群组区块链（Air版本），具体步骤[参考这里](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/tutorial/air/build_chain.html) 。
 **注意：** 当前版本还不支持Table的CRUD接口，只提供KV接口的功能。CRUD的功能将在下个版本支持。
 
 ### 获取源码
 
-```bash
+```shell
 # 直接从github克隆代码
-git clone https://github.com/FISCO-BCOS/spring-boot-crud
+git clone https://github.com/FISCO-BCOS/spring-boot-crud.git
 
-# 若网络很慢，可从gittee克隆代码
+# 若网络很慢，可从gitee克隆代码
 git clone https://gitee.com/FISCO-BCOS/spring-boot-crud
 ```
 
@@ -53,6 +53,7 @@ $ cp ~/fisco/nodes/127.0.0.1/sdk/* src/main/resources/conf/
 </property>
 ...
 ```
+
 项目中关于SDK配置的详细说明请[参考这里](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk/configuration.html)。
 
 WebServer主要配置了监听端口，默认为`45000`，具体如下：
@@ -67,20 +68,21 @@ server:
 
 可以使用IDEA导入并编译并安装该项目，也可使用提供的`mvnw`脚本在命令行编译项目如下：
 
-```bash
+```shell
 # 编译项目
 $ bash mvnw compile
 
 # 安装项目，安装完毕后，在target/目录下生成fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar的jar包
 $ bash mvnw install
 ```
+
 ### 启动spring-boot-crud服务
 
-**方法一：** 
+**方法一：**
 
 打开IDEA导入并编译该项目，编译成功后，运行`AppApplication.java`即可启动spring boot服务。
 
-**方法二**
+**方法二：**
 
 使用`bash mvnw install`生成的jar包`target/fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar`启动spring-boot-crud服务：
 
@@ -140,114 +142,9 @@ $ curl http://localhost:45000/get/fisco
 {"code":200,"msg":null,"data":{"value1":"fisco","value2":"6","value3":"123456789","size":3}}
 ```
 
-**注意：** 当前版本还不支持Table的CRUD接口，只提供KV接口的功能。CRUD的功能将在下个版本支持。
-
-### ~~访问用户信息上链API(CRUD insert)~~（暂不支持）
-
-`spring-boot-crud`基于CRUD insert接口实现了用户信息上链的API，将`Person`类型的用户信息上链，API声明如下：
-
-```java
-@Data
-public class Person {
-    private String name;
-    private String age;
-    private String tel;
-}
-@PostMapping("/insert")
-public ResponseData insert(@RequestBody Person person)  {
-    crudClient.insert(person.getName(),person.getAge(), person.getTel());
-    return ResponseData.success("新增成功");
-}
-```
-
-**使用curl工具访问接口如下**：
-
-```bash
-# 这里假设WebServer监听端口为45000
-# 将用户fisco的信息上链，其中name为fisco, age为6，tel为123456789
-$ curl -H "Content-Type: application/json" -X POST --data '{"name":"fisco", "age":"6", "tel":"123456789"}' http://localhost:45000/insert
-# 返回新增成功的信息
-{"code":200,"msg":"新增成功","data":null}
-```
-
-### ~~访问链上查询用户信息API(CRUD select)~~（暂不支持）
-
-`spring-boot-crud`基于CRUD select接口实现了链上查询用户信息的API，基于用户名查询用户信息，API声明如下：
-
-```java
-@GetMapping("/query/{name}")
-public ResponseData query(@PathVariable("name") String name) throws Exception {
-    return ResponseData.success(crudClient.query(name));
-}
-```
-
-**使用curl工具访问接口如下**：
-
-```bash
-# 这里假设WebServer监听端口为45000
-# 查询用户名为fisco的用户信息
-$ curl http://localhost:45000/query/fisco
-# 返回用户fisco的具体信息
-{"code":200,"msg":null,"data":{"value1":["fisco"],"value2":["6"],"value3":["123456789"],"size":3}}
-```
-
-### ~~访问用户信息链上更新API(CRUD update)~~（暂不支持）
-
-`spring-boot-crud`基于CRUD update接口实现了用户信息链上更新的API，API声明如下：
-
-```java
-@PutMapping("/update")
-public ResponseData update(@RequestBody Person person){
-    crudClient.edit(person.getName(),person.getAge(), person.getTel());
-    return ResponseData.success("修改成功");
-}
-```
-
-**使用curl工具访问接口如下**：
-
-```bash
-# 这里假设WebServer监听端口为45000
-# 更新fisco用户的信息，将其age修改为10，tel修改为123
-$ curl -H "Content-Type: application/json" -X PUT --data '{"name":"fisco", "age":"10", "tel":"123"}' http://localhost:45000/update
-# 返回成功信息
-{"code":200,"msg":"修改成功","data":null}
-
-# 再次查询fisco信息：
-$ curl http://localhost:45000/query/fisco
-# 返回信息如下，用户fisco的age成功修改为10，tel成功修改为123
-{"code":200,"msg":null,"data":{"value1":["fisco"],"value2":["10"],"value3":["123"],"size":3}}
-```
-
-### ~~访问用户信息删除API(CRUD delete)~~（暂不支持）
-
-`spring-boot-crud`基于CRUD delete接口实现了用户信息链上删除的API，该API根据用户名删除用户信息，API声明如下：
-
-```java
-@DeleteMapping("/remove/{name}")
-public ResponseData remove(@PathVariable("name") String name){
-    crudClient.remove(name);
-    return ResponseData.success("删除成功");
-}
-```
-
-**使用curl工具访问接口如下**：
-
-```bash
-# 这里假设WebServer监听端口为45000
-# 删除用户fisco的信息：
-$ curl -X DELETE http://localhost:45000/remove/fisco
-# 返回删除成功的提示
-{"code":200,"msg":"删除成功","data":null}
-
-# 再次查询fisco信息：
-$ curl http://localhost:45000/query/fisco
-# 此时已经无法查询到用户fisco的信息
-{"code":200,"msg":null,"data":{"value1":[],"value2":[],"value3":[],"size":3}}
-```
-
 ## 贡献代码
 
-- 我们欢迎并非常感谢您的贡献，请参阅[代码贡献流程](https://mp.weixin.qq.com/s/hEn2rxqnqp0dF6OKH6Ua-A)和[代码规范](./CONTRIBUTING_CN.md)。
+- 我们欢迎并非常感谢您的贡献，请参阅[代码贡献流程](https://mp.weixin.qq.com/s/hEn2rxqnqp0dF6OKH6Ua-A)和[代码规范](./CONTRIBUTING_CN.md) 。
 - 如项目对您有帮助，欢迎star支持！
 ## 加入我们
 
@@ -257,6 +154,6 @@ $ curl http://localhost:45000/query/fisco
 
 ## 相关链接
 
-- 了解FISCO BCOS项目，请参考[FISCO BCOS文档](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/introduction.html)。
-- 了解Java SDK项目，请参考[Java SDK文档](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk/index.html)。
-- 了解spring boot，请参考[Spring Boot官网](https://spring.io/guides/gs/spring-boot/)。
+- 了解FISCO BCOS项目，请参考[FISCO BCOS文档](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/) 。
+- 了解Java SDK项目，请参考[Java SDK文档](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/develop/sdk/java_sdk/index.html) 。
+- 了解spring boot，请参考[Spring Boot官网](https://spring.io/guides/gs/spring-boot/) 。
