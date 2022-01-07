@@ -48,7 +48,7 @@ $ cp ~/fisco/nodes/127.0.0.1/sdk/* src/main/resources/conf/
                 <value>127.0.0.1:20201</value>
             </list>
         </entry>
-        <entry key="defaultGroup" value="group" />
+        <entry key="defaultGroup" value="group0" />
     </map>
 </property>
 ...
@@ -87,7 +87,7 @@ $ bash mvnw install
 使用`bash mvnw install`生成的jar包`target/fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar`启动spring-boot-crud服务：
 
 ```bash
-# 启动spring-boot-crud(启动成功后会输出create client for group 1 success的日志)
+# 启动spring-boot-crud(启动成功后会输出create client for group0 success的日志)
 $ java -jar ./target/fisco-bcos-spring-boot-crud-0.0.1-SNAPSHOT.jar
 ```
 
