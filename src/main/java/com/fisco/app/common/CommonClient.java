@@ -3,7 +3,6 @@ package com.fisco.app.common;
 import org.fisco.bcos.sdk.BcosSDK;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
-import org.fisco.bcos.sdk.network.NetworkException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +26,7 @@ public abstract class CommonClient {
     private Map<String, Object> contractMap = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
-    public <T> void deploy(String contractName, Class<T> clazz, BcosSDK sdk) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NetworkException {
+    public <T> void deploy(String contractName, Class<T> clazz, BcosSDK sdk) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         // 为群组初始化client
         Client client = sdk.getClient();
         // 向群组部署合约
