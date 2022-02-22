@@ -56,16 +56,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-to-slf4j</artifactId>
-            <version>2.15.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.15.0</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.fisco-bcos.java-sdk/java-sdk -->
         <dependency>
             <groupId>org.fisco-bcos.java-sdk</groupId>
