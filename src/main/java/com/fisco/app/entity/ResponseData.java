@@ -5,6 +5,7 @@ package com.fisco.app.entity;
  * @Description:结果集
  * @Date: Created in 13:35 2021/1/8
  */
+@SuppressWarnings("unchecked")
 public class ResponseData<T> {
 
     private int code;
