@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.fisco-bcos.java-sdk</groupId>
             <artifactId>fisco-bcos-java-sdk</artifactId>
-            <version>3.0.0-rc2</version>
+            <version>3.0.0-rc2-bugfix-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
