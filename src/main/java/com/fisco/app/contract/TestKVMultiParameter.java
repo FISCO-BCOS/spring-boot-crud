@@ -142,12 +142,19 @@ public class TestKVMultiParameter extends Contract {
 
     public static TestKVMultiParameter deploy(Client client, CryptoKeyPair credential) throws
             ContractException {
-        return deploy(TestKVMultiParameter.class, client, credential, getBinary(client.getCryptoSuite()), null, null, null);
+        return deploy(TestKVMultiParameter.class, client, credential, getBinary(client.getCryptoSuite()), getABI(), null, null);
     }
 
     public static class SetEventEventResponse {
         public TransactionReceipt.Logs log;
 
         public BigInteger count;
+    }
+
+    @Override
+    public String toString() {
+        return "TestKVMultiParameter{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
     }
 }

@@ -286,7 +286,7 @@ public class TestCRUD extends Contract {
 
     public static TestCRUD deploy(Client client, CryptoKeyPair credential) throws
             ContractException {
-        return deploy(TestCRUD.class, client, credential, getBinary(client.getCryptoSuite()), null, null, null);
+        return deploy(TestCRUD.class, client, credential, getBinary(client.getCryptoSuite()), getABI(), null, null);
     }
 
     public static class InsertResultEventResponse {
@@ -305,5 +305,12 @@ public class TestCRUD extends Contract {
         public TransactionReceipt.Logs log;
 
         public BigInteger count;
+    }
+
+    @Override
+    public String toString() {
+        return "TestCRUD{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
     }
 }
