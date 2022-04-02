@@ -32,9 +32,9 @@ public abstract class CommonClient {
         // 向群组部署合约
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().getCryptoKeyPair();
         Method method = clazz.getMethod("deploy", Client.class, CryptoKeyPair.class);
-        T result = (T) method.invoke(null, new Object[]{client, cryptoKeyPair});
+        T result = (T) method.invoke(null, client, cryptoKeyPair);
         logger.info("执行CommonClient的deploy方法");
-        logger.info("部署合约成功:{}" + contractName, result);
+        logger.info("部署合约 {} 成功:{}", contractName, result);
         contractMap.put(contractName, result);
     }
 
