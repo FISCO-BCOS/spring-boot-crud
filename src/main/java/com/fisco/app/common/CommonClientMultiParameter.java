@@ -32,9 +32,9 @@ public abstract class CommonClientMultiParameter {
         // 向群组1部署合约
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().getCryptoKeyPair();
         Method method = clazz.getMethod("deploy", Client.class, CryptoKeyPair.class);
-        T result = (T) method.invoke(null, new Object[]{client, cryptoKeyPair});
+        T result = (T) method.invoke(null, client, cryptoKeyPair);
         logger.info("CommonClientMultiParameter");
-        logger.info("部署合约成功:{}" + contractName, result);
+        logger.info("部署合约 {} 成功:{}" , contractName, result);
         contractMap.put(contractName, result);
     }
 

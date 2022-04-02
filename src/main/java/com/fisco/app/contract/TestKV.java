@@ -140,12 +140,19 @@ public class TestKV extends Contract {
     }
 
     public static TestKV deploy(Client client, CryptoKeyPair credential) throws ContractException {
-        return deploy(TestKV.class, client, credential, getBinary(client.getCryptoSuite()), null, null, null);
+        return deploy(TestKV.class, client, credential, getBinary(client.getCryptoSuite()), TestKV.getABI(), null, null);
     }
 
     public static class SetEventEventResponse {
         public TransactionReceipt.Logs log;
 
         public BigInteger count;
+    }
+
+    @Override
+    public String toString() {
+        return "TestKV{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
     }
 }

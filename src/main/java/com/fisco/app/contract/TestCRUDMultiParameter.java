@@ -284,7 +284,7 @@ public class TestCRUDMultiParameter extends Contract {
 
     public static TestCRUDMultiParameter deploy(Client client, CryptoKeyPair credential) throws
             ContractException {
-        return deploy(TestCRUDMultiParameter.class, client, credential, getBinary(client.getCryptoSuite()), null, null, null);
+        return deploy(TestCRUDMultiParameter.class, client, credential, getBinary(client.getCryptoSuite()), getABI(), null, null);
     }
 
     public static class InsertResultEventResponse {
@@ -303,5 +303,12 @@ public class TestCRUDMultiParameter extends Contract {
         public TransactionReceipt.Logs log;
 
         public BigInteger count;
+    }
+
+    @Override
+    public String toString() {
+        return "TestCRUDMultiParameter{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
     }
 }
