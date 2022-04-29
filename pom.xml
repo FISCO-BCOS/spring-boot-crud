@@ -75,8 +75,8 @@
         <dependency>
             <groupId>org.fisco-bcos.java-sdk</groupId>
             <artifactId>fisco-bcos-java-sdk</artifactId>
-            <version>2.8.1-SNAPSHOT</version>
-            <!--排除这个slf4j-log4j12-->
+            <version>2.8.1</version>
+            <!-- exclude slf4j-log4j12-->
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
