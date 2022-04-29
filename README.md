@@ -13,6 +13,9 @@ git clone https://github.com/FISCO-BCOS/spring-boot-crud
 
 # 若网络很慢，可从gittee克隆代码
 git clone https://gitee.com/FISCO-BCOS/spring-boot-crud
+
+# 切换分支至2.x版本
+git checkout -b master-2.0 origin/master-2.0
 ```
 
 ### 配置节点证书
