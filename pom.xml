@@ -30,6 +30,11 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+	    <dependency>
+		<groupId>io.netty</groupId>
+		    <artifactId>netty-all</artifactId>
+		    <version>4.1.53.Final</version>
+	    </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -76,6 +81,10 @@
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+					<groupId>io.netty</groupId>
+	 		 	    <artifactId>netty-all</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
