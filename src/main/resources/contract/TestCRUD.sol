@@ -1,55 +1,81 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.6.0;
+pragma solidity >=0.6.10 <0.8.20;
 pragma experimental ABIEncoderV2;
 
-import "./KVTable.sol";
+import "./Table.sol";
 
-contract KVTableTest {
-    KVTable kv_table;
+contract TestCRUD {
 
-    event SetEvent(int256 count);
+    event CreateResult(int256 count);
+    event InsertResult(int256 count);
+    event UpdateResult(int256 count);
+    event RemoveResult(int256 count);
+
+    TableManager constant tm = TableManager(address(0x1002));
+    Table table;
     string constant TABLE_NAME = "person";
     constructor() public {
-        kv_table = KVTable(0x1009);
-        kv_table.createTable(TABLE_NAME, "name", "age,tel");
+        // create table
+        string[] memory columnNames = new string[](2);
+        columnNames[0] = "age";
+        columnNames[1] = "tel";
+        TableInfo memory tf = TableInfo("name", columnNames);
+
+        tm.createTable(TABLE_NAME, tf);
+        address t_address = tm.openTable(TABLE_NAME);
+        require(t_address != address(0x0), "create table failed");
+        table = Table(t_address);
     }
 
-    function get(string memory name)
+    //select records
+    function select(string memory name)
     public
     view
-    returns (
-        bool,
-        string memory,
-        string memory
-    )
+    returns (string memory, string memory, string memory)
     {
-        bool ok = false;
-        Entry memory entry;
-        (ok, entry) = kv_table.get(TABLE_NAME, name);
+        Entry memory entry = table.select(name);
+
         string memory age;
         string memory tel;
-        if (ok) {
-            age = entry.fields[0].value;
-            tel = entry.fields[1].value;
+        if (entry.fields.length == 2) {
+            age = entry.fields[0];
+            tel = entry.fields[1];
         }
-        return (ok, age, tel);
+        return (name, age, tel);
     }
 
-    function set(
-        string memory name,
-        string memory age,
-        string memory tel
-    ) public returns (int256) {
-        KVField memory kv1 = KVField("age", age);
-        KVField memory kv2 = KVField("tel", tel);
-        KVField[] memory KVFields = new KVField[](2);
-        KVFields[0] = kv1;
-        KVFields[1] = kv2;
-        Entry memory entry = Entry(KVFields);
+    //insert records
+    function insert(string memory name, string memory age, string memory tel)
+    public
+    returns (int256)
+    {
+        string[] memory columns = new string[](2);
+        columns[0] = age;
+        columns[1] = tel;
+        Entry memory entry = Entry(name, columns);
 
-        // the second parameter length of set should <= 255B
-        int256 count = kv_table.set(TABLE_NAME, name, entry);
-        emit SetEvent(count);
+        int256 count = table.insert(entry);
+        emit InsertResult(count);
         return count;
+    }
+
+    //update records
+    function update(string memory name, string memory age, string memory tel)
+    public
+    returns (int256)
+    {
+        UpdateField[] memory updateFields = new UpdateField[](2);
+        updateFields[0] = UpdateField("age", age);
+        updateFields[1] = UpdateField("tel", tel);
+
+        int256 result = table.update(name, updateFields);
+        emit UpdateResult(result);
+        return result;
+    }
+    //remove records
+    function remove(string memory name) public returns (int256) {
+        int256 result = table.remove(name);
+        emit RemoveResult(result);
+        return result;
     }
 }

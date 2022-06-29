@@ -21,7 +21,7 @@ import java.util.List;
  * @Date 2021/3/25 21:45
  * @Created by zyt
  */
-//@Service
+@Service
 public class CRUDClient extends CommonClient implements ApplicationRunner {
 
     public static final Logger logger = LoggerFactory.getLogger(CRUDClient.class.getName());
@@ -39,7 +39,7 @@ public class CRUDClient extends CommonClient implements ApplicationRunner {
     public Tuple3 query(String name) throws ContractException {
 
         TestCRUD testCRUD = (TestCRUD) getContractMap().get("TestCRUD");
-        Tuple3<List<String>, List<String>, List<String>> getValue = testCRUD.select(name);
+        Tuple3<String, String, String> getValue = testCRUD.select(name);
         logger.info("调用CRUDClient的query方法");
         logger.info("结果：{}", getValue);
         return getValue;

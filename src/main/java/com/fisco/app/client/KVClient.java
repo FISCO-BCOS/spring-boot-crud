@@ -1,10 +1,11 @@
 package com.fisco.app.client;
 
 import com.fisco.app.common.CommonClient;
-import com.fisco.app.contract.TestCRUD;
 import com.fisco.app.contract.TestKV;
 import com.fisco.app.utils.SpringUtils;
 import org.fisco.bcos.sdk.v3.BcosSDK;
+import org.fisco.bcos.sdk.v3.client.Client;
+import org.fisco.bcos.sdk.v3.codec.datatypes.generated.tuples.generated.Tuple2;
 import org.fisco.bcos.sdk.v3.codec.datatypes.generated.tuples.generated.Tuple3;
 import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
@@ -28,19 +29,19 @@ public class KVClient extends CommonClient implements ApplicationRunner {
     public static final Logger logger = LoggerFactory.getLogger(KVClient.class.getName());
 
 
-    public void set(String name, String age, String tel) {
+    public void set(String name, String age) {
 
         TestKV testKV = (TestKV) getContractMap().get("TestKV");
-        TransactionReceipt receipt = testKV.set(name, age, tel);
+        TransactionReceipt receipt = testKV.set(name, age);
         logger.info("KVClient");
         logger.info("结果：{}", receipt);
 
     }
 
-    public Tuple3<String, String, String> get(String name) throws ContractException {
+    public Tuple2<Boolean, String> get(String name) throws ContractException {
 
         TestKV testKV = (TestKV) getContractMap().get("TestKV");
-        Tuple3<String, String, String> getValue = testKV.get(name);
+        Tuple2<Boolean, String> getValue = testKV.get(name);
         logger.info("KVClient");
         logger.info("结果：{}", getValue);
         return getValue;

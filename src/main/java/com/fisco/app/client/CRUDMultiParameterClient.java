@@ -19,7 +19,7 @@ import java.util.List;
  * @Date 2021/4/24 21:42
  * @Created by zyt
  */
-//@Service
+@Service
 public class CRUDMultiParameterClient extends CommonClientMultiParameter implements ApplicationRunner {
     public boolean insert(List<String> params) {
         TestCRUDMultiParameter testCRUDMultiParameter = (TestCRUDMultiParameter) getContractMap().get("TestCRUDMultiParameter");
