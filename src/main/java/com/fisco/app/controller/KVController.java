@@ -26,7 +26,7 @@ public class KVController {
 
     @PostMapping("/set")
     public ResponseData set(@RequestBody Person person) {
-        kvClient.set(person.getName(), person.getAge(), person.getTel());
+        kvClient.set(person.getName(), person.getAge());
         return ResponseData.success("新增成功");
     }
 }
