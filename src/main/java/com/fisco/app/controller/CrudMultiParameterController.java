@@ -15,8 +15,8 @@ import java.util.Arrays;
  * @Created by zyt
  */
 // TODO: Table crud is not support now
-//@RestController
-//@RequestMapping("/multiParameter")
+@RestController
+@RequestMapping("/multiParameter")
 public class CrudMultiParameterController {
 
     @Autowired
