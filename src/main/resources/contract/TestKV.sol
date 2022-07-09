@@ -2,54 +2,36 @@
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
-import "./KVTable.sol";
+import "./Table.sol";
 
 contract TestKV {
+    string constant TABLE_NAME = "person_kv";
+    TableManager tm;
     KVTable kv_table;
 
     event SetEvent(int256 count);
-    string constant TABLE_NAME = "person";
-    constructor() public {
-        kv_table = KVTable(0x1009);
-        kv_table.createTable(TABLE_NAME, "name", "age,tel");
+    constructor () public {
+        tm = TableManager(address(0x1002));
+
+        // create kv table
+        tm.createKVTable(TABLE_NAME, "name", "age");
+
+        // get table address
+        address t_address = tm.openTable(TABLE_NAME);
+        kv_table = KVTable(t_address);
     }
 
-    function get(string memory name)
-    public
-    view
-    returns (
-        bool,
-        string memory,
-        string memory
-    )
+    function get(string memory name) public view returns (bool, string memory)
     {
         bool ok = false;
-        Entry memory entry;
-        (ok, entry) = kv_table.get(TABLE_NAME, name);
-        string memory age;
-        string memory tel;
-        if (ok) {
-            age = entry.fields[0].value;
-            tel = entry.fields[1].value;
-        }
-        return (ok, age, tel);
+        string memory value;
+        (ok, value) = kv_table.get(name);
+        return (ok, value);
     }
 
-    function set(
-        string memory name,
-        string memory age,
-        string memory tel
-    ) public returns (int256) {
-        KVField memory kv1 = KVField("age", age);
-        KVField memory kv2 = KVField("tel", tel);
-        KVField[] memory KVFields = new KVField[](2);
-        KVFields[0] = kv1;
-        KVFields[1] = kv2;
-        Entry memory entry = Entry(KVFields);
-
-        // the second parameter length of set should <= 255B
-        int256 count = kv_table.set(TABLE_NAME, name, entry);
-        emit SetEvent(count);
-        return count;
+    function set(string memory name, string memory age) public returns (int256) {
+        int32 result = kv_table.set(name, age);
+        emit SetEvent(result);
+        return result;
     }
 }
