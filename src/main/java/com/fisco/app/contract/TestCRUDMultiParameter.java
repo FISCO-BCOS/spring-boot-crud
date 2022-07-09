@@ -326,4 +326,11 @@ public class TestCRUDMultiParameter extends Contract {
 
         public BigInteger count;
     }
+
+    @Override
+    public String toString() {
+        return "TestCRUDMultiParameter{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
+    }
 }

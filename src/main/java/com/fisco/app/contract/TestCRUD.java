@@ -327,4 +327,11 @@ public class TestCRUD extends Contract {
 
         public BigInteger count;
     }
+
+    @Override
+    public String toString() {
+        return "TestCRUD{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
+    }
 }

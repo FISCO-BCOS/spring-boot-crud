@@ -144,4 +144,11 @@ public class TestKV extends Contract {
 
         public BigInteger count;
     }
+
+    @Override
+    public String toString() {
+        return "TestKV{" +
+                "contractAddress='" + contractAddress + '\'' +
+                '}';
+    }
 }
