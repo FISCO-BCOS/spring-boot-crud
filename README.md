@@ -194,7 +194,7 @@ $ curl -X DELETE http://localhost:45000/remove/fisco
 # 再次查询fisco信息：
 $ curl http://localhost:45000/query/fisco
 # 此时已经无法查询到用户fisco的信息
-{"code":200,"msg":null,"data":{"value1":"","value2":"","value3":"","size":3}}
+{"code":200,"msg":null,"data":{"value1":"fisco","value2":"","value3":"","size":3}}
 ```
 
 ### 访问用户信息上链API(KV set)
@@ -243,7 +243,7 @@ public ResponseData get(@PathVariable("name") String name) throws Exception {
 # 查询用户名为fisco的用户信息
 $ curl http://localhost:45000/get/fisco
 # 返回用户fisco的具体信息
-{"code":200,"msg":null,"data":{"value1":"fisco","value2":"6","size":2}}
+{"code":200,"msg":null,"data":{"value1":"true","value2":"6","size":2}}
 ```
 
 ## 贡献代码
